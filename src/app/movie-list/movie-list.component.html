@@ -1,0 +1,28 @@
+<div class="container">
+	<h2 class="py-4">Movies</h2>
+
+	<div class="form-group mb-4">
+		<input
+      class="form-control"
+      type="text"
+      [(ngModel)]="searchText"
+      placeholder="Search"
+    />
+  </div>
+
+        <div class="row" *ngIf="(data | filter: searchText).length > 0; else noResults">
+            <div class="col-sm-3" 
+            style= 'padding: 20px;' (click)="view(movie)"
+             *ngFor="let movie of data | filter: searchText; let i = index">
+                <img style="width: 100%" src={{movie.pic}}>
+            <b>{{movie?.name}}</b>
+            <br>
+            <span>Duration:{{movie?.duration}}m</span>
+            <br>
+            <span>Rating: {{movie?.userRating}}</span>
+            </div>
+        </div>
+		<ng-template #noResults>
+			<p>No results found for "{{searchText}}".</p>
+		</ng-template>
+	</div>
